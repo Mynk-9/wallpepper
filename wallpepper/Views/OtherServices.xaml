@@ -5,19 +5,23 @@
     xmlns:local="using:wallpepper.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
-    <Grid>
-        <Pivot Title="Internet Services">
+    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
+        <Pivot>
             <PivotItem Header="Bing">
                 <Grid>
-                    <Image x:Name="image" Width="100" Height="100" Source="/Assets/Square44x44Logo.targetsize-24_altform-unplated.png"/>
-                    <Button x:Name="save_img" Content="Get today's pic" Margin="10,864,0,0" VerticalAlignment="Top" />
+                    <Image x:Name="bing_image" Source="/Assets/SplashScreen.scale-200.png" Margin="0,0,0,52"/>
+                    <Button x:Name="save_bing_image" Content="Get today's pic" VerticalAlignment="Bottom" Margin="10,10,10,10" />
                 </Grid>
             </PivotItem>
             <PivotItem Header="Windows Spotlight">
-                <Grid/>
+                <Grid>
+                    <Image x:Name="spotlight_image" Source="/Assets/Square44x44Logo.targetsize-24_altform-unplated.png" Margin="0,0,0,52"/>
+                    <Button x:Name="save_spotlight_img" Content="Get today's pic" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,10,10,10" />
+                </Grid>
             </PivotItem>
         </Pivot>
     </Grid>
