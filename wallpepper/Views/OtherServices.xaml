@@ -13,14 +13,16 @@
         <Pivot>
             <PivotItem Header="Bing">
                 <Grid>
-                    <Image x:Name="bing_image" Source="/Assets/SplashScreen.scale-200.png" Margin="0,0,0,52"/>
-                    <Button x:Name="save_bing_image" Content="Get today's pic" VerticalAlignment="Bottom" Margin="10,10,10,10" />
+                    <Image x:Name="bingImage" Margin="0,0,0,52"/>
+                    <Button x:Name="bingSaveToGallery" Content="Save to Gallery" VerticalAlignment="Bottom" Margin="10,10,10,10" />
+                    <ProgressBar x:Name="bingProgress" HorizontalAlignment="Right" Height="10" VerticalAlignment="Bottom" Width="100" Margin="10,10,10,21" IsIndeterminate="True"/>
                 </Grid>
             </PivotItem>
             <PivotItem Header="Windows Spotlight">
                 <Grid>
-                    <Image x:Name="spotlight_image" Source="/Assets/Square44x44Logo.targetsize-24_altform-unplated.png" Margin="0,0,0,52"/>
-                    <Button x:Name="save_spotlight_img" Content="Get today's pic" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,10,10,10" />
+                    <Image x:Name="spotlightImage" Margin="0,0,0,52"/>
+                    <Button x:Name="spotlightSaveToGallery" Content="Save to Gallery" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,10,10,10" />
+                    <ProgressBar x:Name="spotlightProgress" HorizontalAlignment="Right" Height="10" VerticalAlignment="Bottom" Width="100" Margin="10,10,10,21" IsIndeterminate="True"/>
                 </Grid>
             </PivotItem>
         </Pivot>

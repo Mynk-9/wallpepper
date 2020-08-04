@@ -42,13 +42,17 @@ namespace wallpepper.Views
         private async void getBingImage()
         {
             await Task.Run(getBingImageURL);
-            bing_image.Source = new BitmapImage(new Uri(bingImageURL));
+            bingImage.Source = new BitmapImage(new Uri(bingImageURL));
+            bingProgress.IsIndeterminate = false;
+            bingProgress.Value = bingProgress.Maximum;
         }
 
         private async void getSpotlightImage()
         {
             await Task.Run(getSpotlightImageURL);
-            spotlight_image.Source = new BitmapImage(new Uri(spotlightImageURL));
+            spotlightImage.Source = new BitmapImage(new Uri(spotlightImageURL));
+            spotlightProgress.IsIndeterminate = false;
+            spotlightProgress.Value = spotlightProgress.Maximum;
         }
 
         private void getBingImageURL()
