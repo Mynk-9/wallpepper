@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("wallpepper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Mayank Mathur")]
 [assembly: AssemblyProduct("wallpepper")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © Mayank Mathur 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
