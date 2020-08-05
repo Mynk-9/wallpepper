@@ -48,6 +48,17 @@ namespace wallpepper.Views
             setSpotlightImage(WallpaperHandler.SpotlightImage);
         }
 
+        private async void spotlightImageReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            spotlightProgress.Value = spotlightProgress.Minimum;
+            spotlightProgress.IsIndeterminate = true;
+            BitmapImage image = await getSpotlightImage();
+            WallpaperHandler.setSpotlightImage(image);
+            setSpotlightImage(image);
+        }
+
+        // helping functions
+
         private void setBingImage(BitmapImage image)
         {
             bingImage.Source = image;
