@@ -39,7 +39,7 @@ namespace wallpepper
 
         private ActivationService CreateActivationService()
         {
-            return new ActivationService(this, typeof(Views.MainPage), new Lazy<UIElement>(CreateShell));
+            return new ActivationService(this, typeof(Views.Gallery), new Lazy<UIElement>(CreateShell));
         }
 
         private UIElement CreateShell()

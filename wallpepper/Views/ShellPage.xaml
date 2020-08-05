@@ -34,7 +34,7 @@
             Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/UWP/projectTypes/navigationpane.md
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
-            <winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage" Content="Gallery" >
+            <winui:NavigationViewItem x:Uid="Shell_Gallery" helpers:NavHelper.NavigateTo="views:Gallery" Content="Gallery" >
                 <winui:NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Save"/>
                 </winui:NavigationViewItem.Icon>

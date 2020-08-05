@@ -6,9 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace wallpepper.Views
 {
-    public sealed partial class MainPage : Page, INotifyPropertyChanged
+    public sealed partial class Gallery : Page, INotifyPropertyChanged
     {
-        public MainPage()
+        public Gallery()
         {
             InitializeComponent();
         }

@@ -21,8 +21,6 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Data.Json;
 using wallpepper.Core.Helpers;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace wallpepper.Views
 {
     public sealed partial class OtherServices : Page
