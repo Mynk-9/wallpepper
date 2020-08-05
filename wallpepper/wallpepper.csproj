@@ -152,6 +152,7 @@
     <Compile Include="Views\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WallpaperHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

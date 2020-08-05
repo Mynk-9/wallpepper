@@ -31,26 +31,47 @@ namespace wallpepper.Views
             this.InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            getBingImage();
-            getSpotlightImage();
+            BitmapImage bingImg, spotlightImg;
+            if (WallpaperHandler.isBingImageLoaded == false)
+            {
+                bingImg = await getBingImage();
+                WallpaperHandler.setBingImage(bingImg);
+            }
+            setBingImage(WallpaperHandler.BingImage);
+            if (WallpaperHandler.isSpotlightImageLoaded == false)
+            {
+                spotlightImg = await getSpotlightImage();
+                WallpaperHandler.setSpotlightImage(spotlightImg);
+            }
+            setSpotlightImage(WallpaperHandler.SpotlightImage);
         }
 
-        private async void getBingImage()
+        private void setBingImage(BitmapImage image)
         {
-            await Task.Run(getBingImageURL);
-            bingImage.Source = new BitmapImage(new Uri(bingImageURL));
+            bingImage.Source = image;
             bingProgress.IsIndeterminate = false;
             bingProgress.Value = bingProgress.Maximum;
         }
 
-        private async void getSpotlightImage()
+        private void setSpotlightImage(BitmapImage image)
         {
-            await Task.Run(getSpotlightImageURL);
-            spotlightImage.Source = new BitmapImage(new Uri(spotlightImageURL));
+            spotlightImage.Source = image;
             spotlightProgress.IsIndeterminate = false;
             spotlightProgress.Value = spotlightProgress.Maximum;
+        }
+
+        private async Task<BitmapImage> getBingImage()
+        {
+            await Task.Run(getBingImageURL);
+            return new BitmapImage(new Uri(bingImageURL));
+        }
+
+        private async Task<BitmapImage> getSpotlightImage()
+        {
+            await Task.Run(getSpotlightImageURL);
+            return new BitmapImage(new Uri(spotlightImageURL));
         }
 
         private void getBingImageURL()

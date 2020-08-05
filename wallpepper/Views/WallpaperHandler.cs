@@ -2,10 +2,10 @@
 
 namespace wallpepper.Views
 {
-    static class WallpaperHandler
+    class WallpaperHandler
     {
-        private static BitmapImage SpotlightImage;
-        private static BitmapImage BingImage;
+        public static BitmapImage SpotlightImage { get; private set; }
+        public static BitmapImage BingImage { get; private set; }
 
         public static bool isSpotlightImageLoaded { get; private set; } = false;
         public static bool isBingImageLoaded { get; private set; } = false;
@@ -17,7 +17,7 @@ namespace wallpepper.Views
         }
         public static void setBingImage(BitmapImage img)
         {
-            SpotlightImage = img;
+            BingImage = img;
             isBingImageLoaded = true;
         }
     }
