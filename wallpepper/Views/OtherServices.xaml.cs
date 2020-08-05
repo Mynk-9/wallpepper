@@ -1,31 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-
-using Windows.Data.Json;
-using wallpepper.Core.Helpers;
 
 namespace wallpepper.Views
 {
     public sealed partial class OtherServices : Page
     {
-        private String bingImageURL, spotlightImageURL;
+        private string bingImageURL, spotlightImageURL;
         public OtherServices()
         {
             this.InitializeComponent();
@@ -34,58 +18,58 @@ namespace wallpepper.Views
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             BitmapImage bingImg, spotlightImg;
-            if (WallpaperHandler.isBingImageLoaded == false)
+            if (WallpaperHandler.IsBingImageLoaded == false)
             {
-                bingImg = await getBingImage();
-                WallpaperHandler.setBingImage(bingImg);
+                bingImg = await GetBingImage();
+                WallpaperHandler.SetBingImage(bingImg);
             }
-            setBingImage(WallpaperHandler.BingImage);
-            if (WallpaperHandler.isSpotlightImageLoaded == false)
+            SetBingImage(WallpaperHandler.BingImage);
+            if (WallpaperHandler.IsSpotlightImageLoaded == false)
             {
-                spotlightImg = await getSpotlightImage();
-                WallpaperHandler.setSpotlightImage(spotlightImg);
+                spotlightImg = await GetSpotlightImage();
+                WallpaperHandler.SetSpotlightImage(spotlightImg);
             }
-            setSpotlightImage(WallpaperHandler.SpotlightImage);
+            SetSpotlightImage(WallpaperHandler.SpotlightImage);
         }
 
-        private async void spotlightImageReloadButton_Click(object sender, RoutedEventArgs e)
+        private async void SpotlightImageReloadButton_Click(object sender, RoutedEventArgs e)
         {
             spotlightProgress.Value = spotlightProgress.Minimum;
             spotlightProgress.IsIndeterminate = true;
-            BitmapImage image = await getSpotlightImage();
-            WallpaperHandler.setSpotlightImage(image);
-            setSpotlightImage(image);
+            BitmapImage image = await GetSpotlightImage();
+            WallpaperHandler.SetSpotlightImage(image);
+            SetSpotlightImage(image);
         }
 
         // helping functions
 
-        private void setBingImage(BitmapImage image)
+        private void SetBingImage(BitmapImage image)
         {
             bingImage.Source = image;
             bingProgress.IsIndeterminate = false;
             bingProgress.Value = bingProgress.Maximum;
         }
 
-        private void setSpotlightImage(BitmapImage image)
+        private void SetSpotlightImage(BitmapImage image)
         {
             spotlightImage.Source = image;
             spotlightProgress.IsIndeterminate = false;
             spotlightProgress.Value = spotlightProgress.Maximum;
         }
 
-        private async Task<BitmapImage> getBingImage()
+        private async Task<BitmapImage> GetBingImage()
         {
-            await Task.Run(getBingImageURL);
+            await Task.Run(GetBingImageURL);
             return new BitmapImage(new Uri(bingImageURL));
         }
 
-        private async Task<BitmapImage> getSpotlightImage()
+        private async Task<BitmapImage> GetSpotlightImage()
         {
-            await Task.Run(getSpotlightImageURL);
+            await Task.Run(GetSpotlightImageURL);
             return new BitmapImage(new Uri(spotlightImageURL));
         }
 
-        private void getBingImageURL()
+        private void GetBingImageURL()
         {
             String xmlData;
             bingImageURL = "https://bing.com";
@@ -99,7 +83,7 @@ namespace wallpepper.Views
             bingImageURL += xmlData.Substring(pos[0], pos[1] - pos[0]);
         }
 
-        private void getSpotlightImageURL()
+        private void GetSpotlightImageURL()
         {
             DateTime time = DateTime.Now.ToUniversalTime();
             String formattedTime = time.Year.ToString() + "-"
