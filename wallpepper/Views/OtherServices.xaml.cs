@@ -20,7 +20,7 @@ namespace wallpepper.Views
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            SoftwareBitmapSource bingImg, spotlightImg;
+            SoftwareBitmap bingImg, spotlightImg;
             if (WallpaperHandler.IsBingImageLoaded == false)
             {
                 bingImg = await GetBingImage();
@@ -39,7 +39,7 @@ namespace wallpepper.Views
         {
             spotlightProgress.Value = spotlightProgress.Minimum;
             spotlightProgress.IsIndeterminate = true;
-            SoftwareBitmapSource image = await GetSpotlightImage();
+            SoftwareBitmap image = await GetSpotlightImage();
             WallpaperHandler.SetSpotlightImage(image);
             SetSpotlightImage(image);
         }
@@ -52,21 +52,24 @@ namespace wallpepper.Views
 
         // helping functions
 
-        private void SetBingImage(SoftwareBitmapSource image)
+        private async void SetBingImage(SoftwareBitmap image)
         {
-            bingImage.Source = image;
+            var imageSource = new SoftwareBitmapSource();
+            await imageSource.SetBitmapAsync(image);
+            bingImage.Source = imageSource;
             bingProgress.IsIndeterminate = false;
             bingProgress.Value = bingProgress.Maximum;
         }
 
-        private void SetSpotlightImage(SoftwareBitmapSource image)
+        private async void SetSpotlightImage(SoftwareBitmap image)
         {
-            spotlightImage.Source = image;
+            var imageSource = new SoftwareBitmapSource();
+            await imageSource.SetBitmapAsync(image);
             spotlightProgress.IsIndeterminate = false;
             spotlightProgress.Value = spotlightProgress.Maximum;
         }
 
-        private async Task<SoftwareBitmapSource> GetSoftwareBitmapSourceFromURL(string url)
+        private async Task<SoftwareBitmap> GetSoftwareBitmapSourceFromURL(string url)
         {
             var req = WebRequest.Create(url);
             var res = req.GetResponse();
@@ -77,19 +80,16 @@ namespace wallpepper.Views
             SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8,
                 BitmapAlphaMode.Premultiplied);
 
-            var source = new SoftwareBitmapSource();
-            await source.SetBitmapAsync(softwareBitmap);
-
-            return source;
+            return softwareBitmap;
         }
 
-        private async Task<SoftwareBitmapSource> GetBingImage()
+        private async Task<SoftwareBitmap> GetBingImage()
         {
             await Task.Run(GetBingImageURL);
             return (await GetSoftwareBitmapSourceFromURL(bingImageURL));
         }
 
-        private async Task<SoftwareBitmapSource> GetSpotlightImage()
+        private async Task<SoftwareBitmap> GetSpotlightImage()
         {
             await Task.Run(GetSpotlightImageURL);
             return (await GetSoftwareBitmapSourceFromURL(spotlightImageURL));
