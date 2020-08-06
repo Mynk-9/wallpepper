@@ -43,7 +43,6 @@ namespace wallpepper.Views
         }
         public static async Task<ObservableCollection<GalleryPhotoData>> GetGalleryImages()
         {
-            Debug.WriteLine(storageFolder.Path);
             if (!galleryImagesLoaded)
                 await LoadGalleryImages();
             return galleryPhotoCollection;

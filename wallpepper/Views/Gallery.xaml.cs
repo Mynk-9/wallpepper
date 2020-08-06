@@ -8,9 +8,32 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace wallpepper.Views
 {
+    public class ImageScaleConverter16 : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+            object parameter, string language) => 16 * (double)value;
+        public object ConvertBack(object value, Type targetType,
+            object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ImageScaleConverter9 : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+            object parameter, string language) => 9 * (double)value;
+        public object ConvertBack(object value, Type targetType,
+            object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public sealed partial class Gallery : Page, INotifyPropertyChanged
     {
         public Gallery() => InitializeComponent();

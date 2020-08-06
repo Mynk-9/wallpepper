@@ -1,13 +1,16 @@
 ﻿<Page
-    x:Class="wallpepper.Views.Gallery"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    Style="{StaticResource PageStyle}"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:Custom="using:wallpepper.Views"
+    x:Class="wallpepper.Views.Gallery"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Page.Resources>
+        <Custom:ImageScaleConverter16 x:Key="ImageScaleConverter16"/>
+        <Custom:ImageScaleConverter9 x:Key="ImageScaleConverter9"/>
         <DataTemplate x:Key="PhotosTemplate">
             <Grid>
                 <Image
@@ -19,15 +22,29 @@
         </DataTemplate>
     </Page.Resources>
 
+    <Page.Style>
+        <StaticResource ResourceKey="PageStyle"/>
+    </Page.Style>
 
     <Grid>
-        <controls:AdaptiveGridView Name="AdaptiveGridViewControl"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="52.8" />
+        </Grid.RowDefinitions>
+        <controls:AdaptiveGridView x:Name="AdaptiveGridViewControl"
                                    StretchContentForSingleRow="True"
                                    OneRowModeEnabled="False"
-                                   ItemHeight="180"
-                                   DesiredWidth="320"
+                                   ItemHeight="{Binding Value, Converter={StaticResource ImageScaleConverter9}, ElementName=ImageScaler}"
+                                   DesiredWidth="{Binding Value, Converter={StaticResource ImageScaleConverter16}, ElementName=ImageScaler}"
                                    SelectionMode="Single"
                                    IsItemClickEnabled="False"
                                    ItemTemplate="{StaticResource PhotosTemplate}"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="32.8" Margin="10,0,10,0">
+            <TextBlock Text="Scale Images" VerticalAlignment="Bottom" Height="20" Margin="0,0,0,6.4" />
+            <Slider x:Name="ImageScaler" Maximum="63" Minimum="6" Orientation="Horizontal" VerticalAlignment="Bottom" Value="20" Margin="10,0,10,0" Width="300" />
+        </StackPanel>
+        <!-- 63, 6 are limits of the factors to be multiplied to scale the image size -->
     </Grid>
+
 </Page>
