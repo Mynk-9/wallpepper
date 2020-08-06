@@ -62,6 +62,12 @@ namespace wallpepper.Views
             }
             catch (Exception err)
             {
+                var messageDialog = new MessageDialog("Exception at saving image to gallery! " +
+                        "Debug information:\n" +
+                        err.ToString());
+
+                await messageDialog.ShowAsync();
+
                 return;
             }
 

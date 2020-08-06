@@ -42,20 +42,27 @@ namespace wallpepper.Views
             SoftwareBitmap image = await GetSpotlightImage();
             WallpaperHandler.SetSpotlightImage(image);
             SetSpotlightImage(image);
+            spotlightSaveToGallery.IsEnabled = true;
         }
 
         private void bingSaveToGallery_Click(object sender, RoutedEventArgs e)
         {
             if (WallpaperHandler.IsBingImageLoaded)
+            {
                 GalleryHandler.SaveImageToGallery(WallpaperHandler.BingImage,
                     DateTime.Now.ToString("yyyyMMdd") + ".jpg");
+                bingSaveToGallery.IsEnabled = false;
+            }
         }
 
         private void spotlightSaveToGallery_Click(object sender, RoutedEventArgs e)
         {
             if (WallpaperHandler.IsSpotlightImageLoaded)
+            {
                 GalleryHandler.SaveImageToGallery(WallpaperHandler.SpotlightImage,
                     DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg");
+                spotlightSaveToGallery.IsEnabled = false;
+            }
         }
 
         // helping functions
