@@ -64,6 +64,11 @@ namespace wallpepper.Views
                 try
                 {
                     await encoder.FlushAsync();
+
+                    galleryPhotoCollection.Add(new GalleryPhotoData()
+                    {
+                        Source = "ms-appdata:///local/" + file.Name
+                    });
                 }
                 catch (Exception err)
                 {
