@@ -3,16 +3,31 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Style="{StaticResource PageStyle}"
-    mc:Ignorable="d">
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--
-                The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.
-            -->
-        </Grid>
+    mc:Ignorable="d" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <DataTemplate x:Key="PhotosTemplate">
+            <Grid>
+                <Image
+                    Source="{Binding Source}"
+                    Stretch="UniformToFill"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+
+    <Grid>
+        <controls:AdaptiveGridView Name="AdaptiveGridViewControl"
+                                   StretchContentForSingleRow="True"
+                                   OneRowModeEnabled="False"
+                                   ItemHeight="180"
+                                   DesiredWidth="320"
+                                   SelectionMode="Single"
+                                   IsItemClickEnabled="False"
+                                   ItemTemplate="{StaticResource PhotosTemplate}"/>
     </Grid>
 </Page>

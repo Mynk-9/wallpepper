@@ -1,8 +1,7 @@
 ﻿using Windows.UI.Xaml.Media.Imaging;
-
 namespace wallpepper.Views
 {
-    class WallpaperHandler
+    static class WallpaperHandler
     {
         public static BitmapImage SpotlightImage { get; private set; }
         public static BitmapImage BingImage { get; private set; }
