@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -18,7 +20,7 @@ namespace wallpepper.Views
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            BitmapImage bingImg, spotlightImg;
+            SoftwareBitmapSource bingImg, spotlightImg;
             if (WallpaperHandler.IsBingImageLoaded == false)
             {
                 bingImg = await GetBingImage();
@@ -37,7 +39,7 @@ namespace wallpepper.Views
         {
             spotlightProgress.Value = spotlightProgress.Minimum;
             spotlightProgress.IsIndeterminate = true;
-            BitmapImage image = await GetSpotlightImage();
+            SoftwareBitmapSource image = await GetSpotlightImage();
             WallpaperHandler.SetSpotlightImage(image);
             SetSpotlightImage(image);
         }
@@ -45,35 +47,52 @@ namespace wallpepper.Views
         private void bingSaveToGallery_Click(object sender, RoutedEventArgs e)
         {
             GalleryHandler.SaveImageToGallery(WallpaperHandler.BingImage,
-                DateTime.Now.ToString("yyyyMMddHHmmss")+".jpg");
+                DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg");
         }
 
         // helping functions
 
-        private void SetBingImage(BitmapImage image)
+        private void SetBingImage(SoftwareBitmapSource image)
         {
             bingImage.Source = image;
             bingProgress.IsIndeterminate = false;
             bingProgress.Value = bingProgress.Maximum;
         }
 
-        private void SetSpotlightImage(BitmapImage image)
+        private void SetSpotlightImage(SoftwareBitmapSource image)
         {
             spotlightImage.Source = image;
             spotlightProgress.IsIndeterminate = false;
             spotlightProgress.Value = spotlightProgress.Maximum;
         }
 
-        private async Task<BitmapImage> GetBingImage()
+        private async Task<SoftwareBitmapSource> GetSoftwareBitmapSourceFromURL(string url)
         {
-            await Task.Run(GetBingImageURL);
-            return new BitmapImage(new Uri(bingImageURL));
+            var req = WebRequest.Create(url);
+            var res = req.GetResponse();
+            var imgStream = res.GetResponseStream();
+            var memStream = new MemoryStream();
+            imgStream.CopyTo(memStream);
+            var decoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
+            SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8,
+                BitmapAlphaMode.Premultiplied);
+
+            var source = new SoftwareBitmapSource();
+            await source.SetBitmapAsync(softwareBitmap);
+
+            return source;
         }
 
-        private async Task<BitmapImage> GetSpotlightImage()
+        private async Task<SoftwareBitmapSource> GetBingImage()
+        {
+            await Task.Run(GetBingImageURL);
+            return (await GetSoftwareBitmapSourceFromURL(bingImageURL));
+        }
+
+        private async Task<SoftwareBitmapSource> GetSpotlightImage()
         {
             await Task.Run(GetSpotlightImageURL);
-            return new BitmapImage(new Uri(spotlightImageURL));
+            return (await GetSoftwareBitmapSourceFromURL(spotlightImageURL));
         }
 
         private void GetBingImageURL()
