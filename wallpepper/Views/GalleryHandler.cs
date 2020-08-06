@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.UI.Popups;
 
 namespace wallpepper.Views
 {
@@ -49,6 +51,29 @@ namespace wallpepper.Views
         public static async Task RefreshGallery()
         {
             await LoadGalleryImages();
+        }
+
+        public static async void SaveImageToGallery(SoftwareBitmap image, string name)
+        {
+            StorageFile file = await storageFolder.CreateFileAsync(name).AsTask();
+            using (var filestream = await file.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId,
+                    filestream);
+                encoder.SetSoftwareBitmap(image);
+                try
+                {
+                    await encoder.FlushAsync();
+                }
+                catch (Exception err)
+                {
+                    var messageDialog = new MessageDialog("Exception at saving image to gallery! " +
+                        "Debug information:\n" +
+                        err.ToString());
+
+                    await messageDialog.ShowAsync();
+                }
+            }
         }
     }
 }
