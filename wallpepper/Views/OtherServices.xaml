@@ -14,7 +14,7 @@
             <PivotItem Header="Bing">
                 <Grid>
                     <Image x:Name="bingImage" Margin="0,0,0,52"/>
-                    <Button x:Name="bingSaveToGallery" Content="Save to Gallery" VerticalAlignment="Bottom" Margin="10,10,10,10" />
+                    <Button x:Name="bingSaveToGallery" Content="Save to Gallery" VerticalAlignment="Bottom" Margin="10,10,10,10" Click="bingSaveToGallery_Click" />
                     <ProgressBar x:Name="bingProgress" HorizontalAlignment="Right" Height="10" VerticalAlignment="Bottom" Width="100" Margin="10,10,10,21" IsIndeterminate="True"/>
                 </Grid>
             </PivotItem>

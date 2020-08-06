@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -39,6 +40,12 @@ namespace wallpepper.Views
             BitmapImage image = await GetSpotlightImage();
             WallpaperHandler.SetSpotlightImage(image);
             SetSpotlightImage(image);
+        }
+
+        private void bingSaveToGallery_Click(object sender, RoutedEventArgs e)
+        {
+            GalleryHandler.SaveImageToGallery(WallpaperHandler.BingImage,
+                DateTime.Now.ToString("yyyyMMddHHmmss")+".jpg");
         }
 
         // helping functions
