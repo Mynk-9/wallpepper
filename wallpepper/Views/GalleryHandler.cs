@@ -55,7 +55,16 @@ namespace wallpepper.Views
 
         public static async void SaveImageToGallery(SoftwareBitmap image, string name)
         {
-            StorageFile file = await storageFolder.CreateFileAsync(name).AsTask();
+            StorageFile file;
+            try
+            {
+                file = await storageFolder.CreateFileAsync(name).AsTask();
+            }
+            catch (Exception err)
+            {
+                return;
+            }
+
             using (var filestream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId,

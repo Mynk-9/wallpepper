@@ -46,8 +46,16 @@ namespace wallpepper.Views
 
         private void bingSaveToGallery_Click(object sender, RoutedEventArgs e)
         {
-            GalleryHandler.SaveImageToGallery(WallpaperHandler.BingImage,
-                DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg");
+            if (WallpaperHandler.IsBingImageLoaded)
+                GalleryHandler.SaveImageToGallery(WallpaperHandler.BingImage,
+                    DateTime.Now.ToString("yyyyMMdd") + ".jpg");
+        }
+
+        private void spotlightSaveToGallery_Click(object sender, RoutedEventArgs e)
+        {
+            if (WallpaperHandler.IsSpotlightImageLoaded)
+                GalleryHandler.SaveImageToGallery(WallpaperHandler.SpotlightImage,
+                    DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg");
         }
 
         // helping functions
@@ -65,6 +73,7 @@ namespace wallpepper.Views
         {
             var imageSource = new SoftwareBitmapSource();
             await imageSource.SetBitmapAsync(image);
+            spotlightImage.Source = imageSource;
             spotlightProgress.IsIndeterminate = false;
             spotlightProgress.Value = spotlightProgress.Maximum;
         }
