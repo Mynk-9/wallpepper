@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace wallpepper.Views
 {
@@ -61,11 +62,13 @@ namespace wallpepper.Views
             }
             catch (Exception err)
             {
-                var messageDialog = new MessageDialog("Exception at saving image to gallery! " +
-                        "Debug information:\n" +
-                        err.ToString());
-
-                await messageDialog.ShowAsync();
+                var messageBox = new ContentDialog()
+                {
+                    Title = "Exception at saving image to gallery",
+                    Content = "Debug info:\n" + err.ToString(),
+                    CloseButtonText = "Ok"
+                };
+                await messageBox.ShowAsync();
 
                 return;
             }
@@ -86,11 +89,13 @@ namespace wallpepper.Views
                 }
                 catch (Exception err)
                 {
-                    var messageDialog = new MessageDialog("Exception at saving image to gallery! " +
-                        "Debug information:\n" +
-                        err.ToString());
-
-                    await messageDialog.ShowAsync();
+                    var messageBox = new ContentDialog()
+                    {
+                        Title = "Exception at saving image to gallery",
+                        Content = "Debug info:\n" + err.ToString(),
+                        CloseButtonText = "Ok"
+                    };
+                    await messageBox.ShowAsync();
                 }
             }
         }
