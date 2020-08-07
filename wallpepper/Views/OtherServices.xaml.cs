@@ -20,6 +20,11 @@ namespace wallpepper.Views
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            if (WallpaperHandler.IsBingImageSavedToGallery)
+                bingSaveToGallery.IsEnabled = false;
+            if (WallpaperHandler.IsSpotLightImageSavedToGallery)
+                spotlightSaveToGallery.IsEnabled = false;
+
             SoftwareBitmap bingImg, spotlightImg;
             if (WallpaperHandler.IsBingImageLoaded == false)
             {
@@ -39,10 +44,13 @@ namespace wallpepper.Views
         {
             spotlightProgress.Value = spotlightProgress.Minimum;
             spotlightProgress.IsIndeterminate = true;
+
             SoftwareBitmap image = await GetSpotlightImage();
             WallpaperHandler.SetSpotlightImage(image);
             SetSpotlightImage(image);
+
             spotlightSaveToGallery.IsEnabled = true;
+            WallpaperHandler.IsSpotLightImageSavedToGallery = false;
         }
 
         private void bingSaveToGallery_Click(object sender, RoutedEventArgs e)
@@ -51,7 +59,8 @@ namespace wallpepper.Views
             {
                 GalleryHandler.SaveImageToGallery(WallpaperHandler.BingImage,
                     DateTime.Now.ToString("yyyyMMdd") + ".jpg");
-                bingSaveToGallery.IsEnabled = false;
+                WallpaperHandler.IsBingImageSavedToGallery = true;
+                bingSaveToGallery.IsEnabled = !WallpaperHandler.IsBingImageSavedToGallery;
             }
         }
 
@@ -61,7 +70,8 @@ namespace wallpepper.Views
             {
                 GalleryHandler.SaveImageToGallery(WallpaperHandler.SpotlightImage,
                     DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg");
-                spotlightSaveToGallery.IsEnabled = false;
+                WallpaperHandler.IsSpotLightImageSavedToGallery = true;
+                spotlightSaveToGallery.IsEnabled = !WallpaperHandler.IsSpotLightImageSavedToGallery;
             }
         }
 

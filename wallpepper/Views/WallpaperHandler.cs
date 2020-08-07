@@ -1,10 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Helpers;
-using Microsoft.Xaml.Interactivity;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
@@ -14,10 +8,12 @@ namespace wallpepper.Views
     static class WallpaperHandler
     {
         public static SoftwareBitmap SpotlightImage { get; private set; }
-        public static SoftwareBitmap BingImage { get; private set; }
-
         public static bool IsSpotlightImageLoaded { get; private set; } = false;
+        public static bool IsSpotLightImageSavedToGallery { get; set; } = false;
+
+        public static SoftwareBitmap BingImage { get; private set; }
         public static bool IsBingImageLoaded { get; private set; } = false;
+        public static bool IsBingImageSavedToGallery { get; set; } = false;
 
         public static void SetSpotlightImage(SoftwareBitmap img)
         {
