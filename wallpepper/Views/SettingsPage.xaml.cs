@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -13,8 +14,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace wallpepper.Views
 {
-    // TODO WTS: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/UWP/pages/settings-codebehind.md
-    // TODO WTS: Change the URL for your privacy policy in the Resource File, currently set to https://YourPrivacyUrlGoesHere
     public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     {
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
@@ -53,7 +52,8 @@ namespace wallpepper.Views
 
         private string GetVersionDescription()
         {
-            var appName = "Wallpepper".GetLocalized();
+            //var appName = "Wallpepper".GetLocalized();
+            var appName = "Wallpepper";
             var package = Package.Current;
             var packageId = package.Id;
             var version = packageId.Version;
@@ -73,7 +73,7 @@ namespace wallpepper.Views
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
+        private void Set<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))
             {

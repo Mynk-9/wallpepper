@@ -27,7 +27,7 @@
                         GroupName="AppTheme" >
                         <RadioButton.CommandParameter>
                             <xaml:ElementTheme>Light</xaml:ElementTheme>
-                        </RadioButton.CommandParameter> 
+                        </RadioButton.CommandParameter>
                     </RadioButton>
                     <RadioButton 
                         x:Uid="Settings_Theme_Dark"
