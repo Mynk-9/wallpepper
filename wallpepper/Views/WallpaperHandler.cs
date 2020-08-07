@@ -1,4 +1,14 @@
-﻿using Windows.Graphics.Imaging;
+﻿using Microsoft.Toolkit.Uwp.UI.Helpers;
+using Microsoft.Xaml.Interactivity;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.System.UserProfile;
 namespace wallpepper.Views
 {
     static class WallpaperHandler
@@ -18,6 +28,32 @@ namespace wallpepper.Views
         {
             BingImage = img;
             IsBingImageLoaded = true;
+        }
+    }
+
+    static class DesktopWallpaper
+    {
+        // The following commented lines are saved for future purpose if we need
+        // to set wallpaper on devices not supporting UserProfilePersonalizationSettings
+        /**
+        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
+        private static extern int SystemParametersInfo(uint uAction, int uParam, StringBuilder lpvParam, uint fuWinIni);
+
+        private enum WallpaperAction
+        {
+            SPI_SETDESKWALLPAPER = 0x0014,
+            SPIF_UPDATEINIFILE = 0x0001
+        }
+        */
+
+        public static async Task<bool> SetDesktopBackgroundWallpaper(string fileUri)
+        {
+            if (!UserProfilePersonalizationSettings.IsSupported())
+                return false;
+
+            UserProfilePersonalizationSettings personalizationSettings = UserProfilePersonalizationSettings.Current;
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileUri));
+            return await personalizationSettings.TrySetWallpaperImageAsync(file);
         }
     }
 }

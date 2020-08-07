@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -76,12 +77,17 @@ namespace wallpepper.Views
             var res = await messageBox.ShowAsync();
 
             if (res == ContentDialogResult.Primary)
-                MakeDesktopBackground(source);
-        }
-
-        private void MakeDesktopBackground(string path)
-        {
-
+            {
+                Debug.WriteLine(source);
+                bool success = await DesktopWallpaper.SetDesktopBackgroundWallpaper(source);
+                messageBox = new ContentDialog()
+                {
+                    Title = "Desktop Wallpaper",
+                    Content = (success ? "Wallpaper added successfully" : "There was some error at setting wallpaper"),
+                    PrimaryButtonText = "Ok"
+                };
+                await messageBox.ShowAsync();
+            }
         }
     }
 }
