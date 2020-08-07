@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
@@ -57,6 +58,30 @@ namespace wallpepper.Views
         {
             var thisAdaptiveGrid = ((Page)sender).FindDescendantByName("AdaptiveGridViewControl") as AdaptiveGridView;
             thisAdaptiveGrid.ItemsSource = await GalleryHandler.GetGalleryImages();
+            thisAdaptiveGrid.ItemClick += ThisAdaptiveGrid_ItemClick;
+        }
+
+        private async void ThisAdaptiveGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = e.ClickedItem as GalleryPhotoData;
+            var source = item.Source;
+
+            var messageBox = new ContentDialog()
+            {
+                Title = "Desktop BAckground",
+                Content = "Do you want to make the image as desktop background?",
+                PrimaryButtonText = "Yes",
+                SecondaryButtonText = "No"
+            };
+            var res = await messageBox.ShowAsync();
+
+            if (res == ContentDialogResult.Primary)
+                MakeDesktopBackground(source);
+        }
+
+        private void MakeDesktopBackground(string path)
+        {
+
         }
     }
 }

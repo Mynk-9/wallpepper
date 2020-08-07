@@ -37,7 +37,7 @@
                                    ItemHeight="{Binding Value, Converter={StaticResource ImageScaleConverter9}, ElementName=ImageScaler}"
                                    DesiredWidth="{Binding Value, Converter={StaticResource ImageScaleConverter16}, ElementName=ImageScaler}"
                                    SelectionMode="Single"
-                                   IsItemClickEnabled="False"
+                                   IsItemClickEnabled="True"
                                    ItemTemplate="{StaticResource PhotosTemplate}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Height="32.8" Margin="10,0,10,0">
