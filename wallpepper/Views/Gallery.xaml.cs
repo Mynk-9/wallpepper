@@ -69,7 +69,7 @@ namespace wallpepper.Views
 
             var messageBox = new ContentDialog()
             {
-                Title = "Desktop BAckground",
+                Title = "Desktop Background",
                 Content = "Do you want to make the image as desktop background?",
                 PrimaryButtonText = "Yes",
                 SecondaryButtonText = "No"
@@ -78,7 +78,6 @@ namespace wallpepper.Views
 
             if (res == ContentDialogResult.Primary)
             {
-                Debug.WriteLine(source);
                 bool success = await DesktopWallpaper.SetDesktopBackgroundWallpaper(source);
                 messageBox = new ContentDialog()
                 {

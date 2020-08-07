@@ -143,7 +143,7 @@
     <Compile Include="Activation\DefaultActivationHandler.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
-    <Compile Include="Views\GalleryHandler.cs" />
+    <Compile Include="Helpers\GalleryHandler.cs" />
     <Compile Include="Views\OtherServices.xaml.cs">
       <DependentUpon>OtherServices.xaml</DependentUpon>
     </Compile>
@@ -156,7 +156,7 @@
     <Compile Include="Views\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WallpaperHandler.cs" />
+    <Compile Include="Helpers\WallpaperHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

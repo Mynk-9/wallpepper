@@ -53,7 +53,7 @@ namespace wallpepper.Views
             WallpaperHandler.IsSpotLightImageSavedToGallery = false;
         }
 
-        private void bingSaveToGallery_Click(object sender, RoutedEventArgs e)
+        private void BingSaveToGallery_Click(object sender, RoutedEventArgs e)
         {
             if (WallpaperHandler.IsBingImageLoaded)
             {
@@ -64,7 +64,7 @@ namespace wallpepper.Views
             }
         }
 
-        private void spotlightSaveToGallery_Click(object sender, RoutedEventArgs e)
+        private void SpotlightSaveToGallery_Click(object sender, RoutedEventArgs e)
         {
             if (WallpaperHandler.IsSpotlightImageLoaded)
             {
@@ -123,7 +123,7 @@ namespace wallpepper.Views
 
         private void GetBingImageURL()
         {
-            String xmlData;
+            string xmlData;
             bingImageURL = "https://bing.com";
             using (var client = new WebClient())
                 xmlData = client.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-IN");
@@ -138,19 +138,19 @@ namespace wallpepper.Views
         private void GetSpotlightImageURL()
         {
             DateTime time = DateTime.Now.ToUniversalTime();
-            String formattedTime = time.Year.ToString() + "-"
+            string formattedTime = time.Year.ToString() + "-"
                 + time.Month.ToString() + "-"
                 + time.Day.ToString() + "T"
                 + time.Hour.ToString() + ":"
                 + time.Minute.ToString() + ":"
                 + time.Second.ToString() + "Z";
 
-            String jsonDataLink = "https://arc.msn.com/v3/Delivery/Cache?pid=209567&fmt=json&rafb=0&ua=WindowsShellClient%2F0&disphorzres=1080&dispvertres=1920&lo=80217&pl=en-US&lc=en-US&ctry=us&time=" + formattedTime;
-            String jsonData;
+            string jsonDataLink = "https://arc.msn.com/v3/Delivery/Cache?pid=209567&fmt=json&rafb=0&ua=WindowsShellClient%2F0&disphorzres=1080&dispvertres=1920&lo=80217&pl=en-US&lc=en-US&ctry=us&time=" + formattedTime;
+            string jsonData;
             using (var client = new WebClient())
                 jsonData = client.DownloadString(jsonDataLink);
 
-            jsonData = jsonData.Replace("\\", String.Empty);
+            jsonData = jsonData.Replace("\\", string.Empty);
             int[] pos = new int[2];
             pos[0] = jsonData.IndexOf("https://");
 
