@@ -37,6 +37,7 @@ namespace wallpepper.Views
                     photos.Add(photo);
                 }
             }
+            photos.Reverse();
             galleryPhotoCollection = new ObservableCollection<GalleryPhotoData>(photos);
             galleryImagesLoaded = true;
         }

@@ -82,7 +82,7 @@ namespace wallpepper.Views
                 messageBox = new ContentDialog()
                 {
                     Title = "Desktop Wallpaper",
-                    Content = (success ? "Wallpaper added successfully" : "There was some error at setting wallpaper"),
+                    Content = (success ? "Wallpaper changed successfully" : "There was some error at setting wallpaper"),
                     PrimaryButtonText = "Ok"
                 };
                 await messageBox.ShowAsync();
