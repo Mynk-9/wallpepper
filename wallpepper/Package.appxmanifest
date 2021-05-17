@@ -10,7 +10,7 @@
   <Identity
     Name="BE276970-AEE4-40CE-BA1A-69AC8C414D18"
     Publisher="CN=Mayank Mathur"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="BE276970-AEE4-40CE-BA1A-69AC8C414D18" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
