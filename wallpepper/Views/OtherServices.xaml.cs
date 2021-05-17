@@ -137,15 +137,7 @@ namespace wallpepper.Views
 
         private void GetSpotlightImageURL()
         {
-            DateTime time = DateTime.Now.ToUniversalTime();
-            string formattedTime = time.Year.ToString() + "-"
-                + time.Month.ToString() + "-"
-                + time.Day.ToString() + "T"
-                + time.Hour.ToString() + ":"
-                + time.Minute.ToString() + ":"
-                + time.Second.ToString() + "Z";
-
-            string jsonDataLink = "https://arc.msn.com/v3/Delivery/Cache?pid=209567&fmt=json&rafb=0&ua=WindowsShellClient%2F0&disphorzres=1080&dispvertres=1920&lo=80217&pl=en-US&lc=en-US&ctry=us&time=" + formattedTime;
+            string jsonDataLink = "https://arc.msn.com/v3/Delivery/Placement?pid=338387&fmt=json&Lc=en-US&cdm=1&ctry=IN";
             string jsonData;
             using (var client = new WebClient())
                 jsonData = client.DownloadString(jsonDataLink);
