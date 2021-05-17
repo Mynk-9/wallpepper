@@ -170,11 +170,19 @@
     <comment>Parameter must be an Enum name in enum to boolean converter</comment>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>About</value>
     <comment>About this application title for Settings</comment>
   </data>
   <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">
     <value>https://raw.githubusercontent.com/Mynk-9/wallpepper/master/Privacy%20Statement.txt</value>
     <comment>Here is your Privacy Statement url for Settings</comment>
+  </data>
+  <data name="Settings_Acknowledgements.Text" xml:space="preserve">
+    <value>Acknowledgements</value>
+    <comment>Acknowledgement title for Settings</comment>
+  </data>
+  <data name="Settings_AcknowledgementsDescription.Text" xml:space="preserve">
+    <value>Created the logo at LogoMakr.com</value>
+    <comment>Acknowledgement description for Settings</comment>
   </data>
 </root>

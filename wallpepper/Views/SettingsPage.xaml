@@ -52,7 +52,16 @@
                 </StackPanel>
             </StackPanel>
 
-            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <TextBlock x:Uid="Settings_Acknowledgements" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="{StaticResource SmallTopMargin}" />
+
+            <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                <TextBlock
+                    x:Uid="Settings_AcknowledgementsDescription"
+                    Margin="{StaticResource XSmallTopMargin}"
+                    Style="{ThemeResource BodyTextBlockStyle}" />
+            </StackPanel>
+
+            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="{StaticResource SmallTopMargin}" />
 
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind VersionDescription, Mode=OneWay}" />
